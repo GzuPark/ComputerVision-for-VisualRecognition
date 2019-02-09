@@ -229,7 +229,7 @@ int main()
 	Image_feature Image_feature;
 
 
-	String folderpath = "C:/panaroma";
+	String folderpath = "./data3";
 	vector<String> filenames;
 	glob(folderpath, filenames);
 
