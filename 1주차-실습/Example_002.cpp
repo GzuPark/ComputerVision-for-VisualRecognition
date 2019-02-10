@@ -24,7 +24,10 @@ int main() {
 	printf("input images...\n");
 	for (int i = 0; i < NUM; i++)
 	{
-		imgArray[i] = imread("./images/" + std::to_string(i + 1) + ".jpg");
+		// Use this one if you follow the guide
+		// imgArray[i] = imread("./images/" + std::to_string(i + 1) + ".jpg");
+		// Use this one if you keep original path
+		imgArray[i] = imread("./data2/" + std::to_string(i + 1) + ".jpg");
 	}
 
 	//Panormama stitching func start

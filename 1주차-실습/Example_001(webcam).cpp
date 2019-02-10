@@ -20,7 +20,7 @@ int main()
 	//*****************각자 검출하고싶은 물체의 이미지 파일 위치를 대입
 
 	Mat cam, colorimg1, img1;
-	colorimg1 = imread("이미지 주소를 넣으세요", IMREAD_COLOR);
+	colorimg1 = imread("./data1/opencv.png", IMREAD_COLOR);
 	cvtColor(colorimg1, img1, CV_RGB2GRAY);
 	
 	//카메라 준비
