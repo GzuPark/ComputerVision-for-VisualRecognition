@@ -14,6 +14,9 @@
 |  3 | 딥러닝기반 물체 인식-2D |  ...     |  ...     |   |   |
 |  4 | 딥러닝기반 물체 인식-3D |   ...    |  ...     |   |   |
 
-
+## Mac compile
+```sh
+g++ $(pkg-config --cflags --libs /usr/local/Cellar/opencv@2/2.4.13.7_2/lib/pkgconfig/opencv.pc) -std=c++11 MYFILE.cpp -o MYFILE
+```
 
 
