@@ -26,7 +26,7 @@ Image_feature find_image_feature(Mat img)
     Mat img_g;
     Mat descriptors;
 
-    cvtColor(img, img_g, COLOR_BGR2GRAY );
+    cvtColor(img, img_g, COLOR_BGR2GRAY);
 
     SiftDescriptorExtractor detector;
     detector.detect(img_g, keypoint);
@@ -51,14 +51,14 @@ double find_matches_percent(Image_feature img1, Image_feature img2)
 
     double maxDistance = 0;
     double minDistance = 100;
-    double distance;
+    double dDistance;
 
     for (int i = 0; i < img1.descriptors.rows; i++)
     {
-        distance = matches[i].distance;
+        dDistance = matches[i].distance;
 
-        if (distance < minDistance) minDistance = distance;
-        if (distance > maxDistance) maxDistance = distance;
+        if (dDistance < minDistance) minDistance = dDistance;
+        if (dDistance > maxDistance) maxDistance = dDistance;
     }
 
     for (int i = 0; i < img1.descriptors.rows; i++)
@@ -72,7 +72,7 @@ double find_matches_percent(Image_feature img1, Image_feature img2)
     vector<Point2f> img1_pt;
     vector<Point2f> img2_pt;
 
-    for (int i = 0; good_matches.size(); i++)
+    for (int i = 0; i < good_matches.size(); i++)
     {
         img1_pt.push_back(img1.keypoint[good_matches[i].queryIdx].pt);
         img2_pt.push_back(img2.keypoint[good_matches[i].trainIdx].pt);
@@ -116,13 +116,14 @@ Mat panorama_stiching(Image_feature img1, Image_feature img2)
         {
             good_matches.push_back(matches[i][0]);
         }
+        if (i == matches.size() - 1) break;
     }
     cout << "Good match : " << good_matches.size() << endl;
 
     vector<Point2f> img1_pt;
     vector<Point2f> img2_pt;
 
-    for (int i = 0; good_matches.size(); i++)
+    for (int i = 0; i < good_matches.size(); i++)
     {
         img1_pt.push_back(img1.keypoint[good_matches[i].queryIdx].pt);
         img2_pt.push_back(img2.keypoint[good_matches[i].trainIdx].pt);
@@ -183,7 +184,7 @@ Mat panorama_stiching(Image_feature img1, Image_feature img2)
     }
     matPanorama = Mat(Size(maxX, maxY), CV_32F);
     warpPerspective(img1.img, matPanorama, Htr, matPanorama.size(), INTER_CUBIC, BORDER_CONSTANT, 0);
-    warpPerspective(img2.img, matPanorama, (Htr * HomoMatrix), matPanorama.size(), INTER_CUBIC, BORDER_CONSTANT, 0);
+    warpPerspective(img2.img, matPanorama, (Htr * HomoMatrix), matPanorama.size(), INTER_CUBIC, BORDER_TRANSPARENT, 0);
 
     return matPanorama;
 }
@@ -225,7 +226,7 @@ int main()
         {
             if (i != j)
             {
-                if (find_matches_percent(Image_array[i], Image_array[j]) >= 10) match_count++;
+                if ((find_matches_percent(Image_array[i], Image_array[j])) >= 10) match_count++;
             }
         }
         if (max_count < match_count)
@@ -246,7 +247,7 @@ int main()
     int maxj = 0;
     double maxper = 0;
 
-    for (int i = 0; i < filenames.size(); i++)
+    for (int i = 0; i < filenames.size() - 1; i++)
     {
         Image_feature = find_image_feature(Panorama);
 
@@ -260,6 +261,8 @@ int main()
                 maxj = j;
             }
         }
+        if (maxper < 10) break;
+
         cout << "---max match done --- " << maxj << endl;
 
         Panorama = panorama_stiching(Image_feature, Image_array[maxj]);
