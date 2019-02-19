@@ -94,23 +94,23 @@ int main()
         cvTermCriteria(CV_TERMCRIT_ITER + CV_TERMCRIT_EPS, 1000, 0.000001)
     );
 
-    // cout << "\n---------------------------------" << endl;
-    // cout << "               svm train           " << endl;
-    // cout << "---------------------------------" << endl;
-
-    // svm.train_auto(HOG_train_data_Mat, HOG_train_data_label_Mat, Mat(), Mat(), params, 10);
-
-    // cout << "\n---------------------------------" << endl;
-    // cout << "               svm save            " << endl;
-    // cout << "---------------------------------" << endl;
-
-    // svm.save("./data1/MNIST_HOG_SVM.xml")
-
     cout << "\n---------------------------------" << endl;
-    cout << "               svm load         " << endl;
+    cout << "               svm train           " << endl;
     cout << "---------------------------------" << endl;
 
-    svm.load("./data1/MNIST_HOG_SVM_Linear_acc97.xml");
+    svm.train_auto(HOG_train_data_Mat, HOG_train_data_label_Mat, Mat(), Mat(), params, 10);
+
+    cout << "\n---------------------------------" << endl;
+    cout << "               svm save            " << endl;
+    cout << "---------------------------------" << endl;
+
+    svm.save("./data1/MNIST_HOG_SVM.xml");
+
+    // cout << "\n---------------------------------" << endl;
+    // cout << "               svm load         " << endl;
+    // cout << "---------------------------------" << endl;
+
+    // svm.load("./data1/MNIST_HOG_SVM_Linear_acc97.xml");
 
     cout << "\n---------------------------------" << endl;
     cout << "               svm predict         " << endl;
@@ -190,4 +190,3 @@ vector<float> find_HOG_feature_image(Mat img)
 
     return hog_descriptor;
 }
-
