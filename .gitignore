@@ -1,6 +1,7 @@
 .vscode
 *.out
 result.jpg
+assets/*
 
 2주차-실습/data1/image_train_rs.csv
 2주차-실습/data1/MNIST
