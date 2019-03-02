@@ -1,3 +1,6 @@
 [submodule "week3"]
 	path = week3
 	url = https://github.com/SoonminHwang/detection.pytorch
+[submodule "week4"]
+	path = week4
+	url = https://github.com/SoonminHwang/pointnet.pytorch
